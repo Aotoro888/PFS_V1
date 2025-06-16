@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>PFS - อัปโหลดสลิป</title>
+</head>
+<body>
+  <h2>📤 อัปโหลดสลิปค่าส่วนกลาง</h2>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    บ้านเลขที่: <input type="text" name="house_number" required><br>
+
+    เดือน/ปี:
+    <select name="month_year" required>
+      <option value="">-- เลือกเดือน/ปี --</option>
+      <option value="ม.ค. 68">ม.ค. 68</option>
+      <option value="ก.พ. 68">ก.พ. 68</option>
+      <option value="มี.ค. 68">มี.ค. 68</option>
+      <option value="เม.ย. 68">เม.ย. 68</option>
+      <option value="พ.ค. 68">พ.ค. 68</option>
+      <option value="มิ.ย. 68">มิ.ย. 68</option>
+      <option value="ก.ค. 68">ก.ค. 68</option>
+      <option value="ส.ค. 68">ส.ค. 68</option>
+      <option value="ก.ย. 68">ก.ย. 68</option>
+      <option value="ต.ค. 68">ต.ค. 68</option>
+      <option value="พ.ย. 68">พ.ย. 68</option>
+      <option value="ธ.ค. 68">ธ.ค. 68</option>
+    </select><br>
+
+    เลือกรูปภาพสลิป: <input type="file" name="file" accept="image/*" required><br>
+    <button type="submit">อัปโหลด</button>
+  </form>
+
+  <h3>📊 ประวัติการอัปโหลด</h3>
+  <table border="1" cellpadding="5">
+    <tr>
+      <th>เวลา</th>
+      <th>บ้านเลขที่</th>
+      <th>เดือน</th>
+      <th>ไฟล์</th>
+      <th>สถานะ</th>
+    </tr>
+    {% for p in payments %}
+    <tr>
+      <td>{{ p.upload_time }}</td>
+      <td>{{ p.house_number }}</td>
+      <td>{{ p.month_year }}</td>
+      <td><a href="/{{ p.image_filename }}" target="_blank">ดูสลิป</a></td>
+      <td style="color: {{ 'green' if p.amount_verified else 'red' }}">
+        {{ 'ถูกต้อง' if p.amount_verified else 'ผิด' }}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
