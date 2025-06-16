@@ -1,5 +1,8 @@
 fastapi
 uvicorn
-python-multipart
+sqlalchemy
 pytesseract
-Pillow
+pillow
+jinja2
+psycopg2-binary
+python-multipart
